@@ -1,0 +1,116 @@
+paths:
+  /api/sessions/register:
+    post:
+      summary: Registra un nuevo usuario
+      tags:
+        - Sessions
+      description: Registra un nuevo usuario en el sistema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/UserInput'
+      responses:
+        "200":
+          description: Usuario registrado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  payload:
+                    type: string
+                    example: User registered
+        "400":
+          description: Valores incompletos o usuario ya existe
+        "500":
+          description: Error interno del servidor
+
+  /api/sessions/login:
+    post:
+      summary: Inicia sesión de usuario
+      tags:
+        - Sessions
+      description: Autentica un usuario y crea una sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Email del usuario
+                password:
+                  type: string
+                  description: Contraseña del usuario
+              example:
+                email: "juan@example.com"
+                password: "password123"
+      responses:
+        "200":
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Logged in
+        "400":
+          description: Credenciales inválidas
+        "500":
+          description: Error interno del servidor
+
+  /api/sessions/current:
+    get:
+      summary: Obtiene el usuario actual
+      tags:
+        - Sessions
+      description: Obtiene la información del usuario actualmente autenticado
+      responses:
+        "200":
+          description: Usuario actual obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/User'
+        "401":
+          description: No autorizado
+        "500":
+          description: Error interno del servidor
+
+  /api/sessions/unprotectedLogin:
+    get:
+      summary: Login sin protección (para testing)
+      tags:
+        - Sessions
+      description: Endpoint de login sin protección para pruebas
+      responses:
+        "200":
+          description: Login exitoso
+        "400":
+          description: Credenciales inválidas
+
+  /api/sessions/unprotectedCurrent:
+    get:
+      summary: Obtiene usuario actual sin protección (para testing)
+      tags:
+        - Sessions
+      description: Obtiene usuario actual sin validaciones para pruebas
+      responses:
+        "200":
+          description: Usuario obtenido correctamente
