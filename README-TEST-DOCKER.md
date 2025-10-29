@@ -6,14 +6,16 @@ Este proyecto está **dockerizado** para fácil despliegue e incluye una suite c
 
 ### **📦 Descargar Imagen desde Docker Hub**
 
+https://hub.docker.com/repository/docker/maxibr82/maxibackend3final/general
+
 #### **Versión 1.0 (Estable)**
 ```bash
-docker pull maxilbr82/maxibackend3final:v1.0
+docker pull maxibr82/maxibackend3final:v1.0
 ```
 
 #### **Versión Latest (Más Reciente)**
 ```bash
-docker pull maxilbr82/maxibackend3final:latest
+docker pull maxibr82/maxibackend3final:latest
 ```
 
 ### **🚀 Ejecutar Contenedor Docker**
